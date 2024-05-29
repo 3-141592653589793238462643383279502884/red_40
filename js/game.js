@@ -21,16 +21,30 @@ var player = new Mario.Player([0,0]);
 //Cool!
 //TODO: Automatically scale the game to work and look good on widescreen.
 //TODO: fiddling with scaled sprites looks BETTER, but not perfect. Hmm.
-canvas.width = 762;
-canvas.height = 720;
-ctx.scale(3,3);
+
+//added this to make the game look better on widescreen. -mightyowl866
+// Widescreen aspect ratio
+var aspectRatio = 16 / 9;
+
+// Screen dimensions
+var screenWidth = window.innerWidth;
+var screenHeight = window.innerHeight;
+
+// Set canvas dimensions based on aspect ratio
+canvas.width = screenWidth;
+canvas.height = screenHeight;
+
+// Set viewport dimensions based on aspect ratio
+vWidth = screenWidth / 3; // Adjust this value as needed
+vHeight = vWidth / aspectRatio;
+
+// Scale the context
+ctx.scale(screenWidth / vWidth, screenHeight / vHeight);
 document.body.appendChild(canvas);
 
 //viewport
 var vX = 0,
-    vY = 0,
-    vWidth = 256,
-    vHeight = 240;
+    vY = 0
 
 //load our images
 resources.load([
@@ -190,7 +204,8 @@ function render() {
 
   //scenery gets drawn first to get layering right.
   for(var i = 0; i < 15; i++) {
-    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
+    //changed this to 50 to fix the right side of the screen. -mightyowl866
+    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 50; j++){
       if (level.scenery[i][j]) {
         renderEntity(level.scenery[i][j]);
       }
@@ -214,7 +229,8 @@ function render() {
 
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
-    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
+    //changed this to 50 to fix the right side of the screen. -mightyowl866
+    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 50; j++){
       if (level.statics[i][j]) {
         renderEntity(level.statics[i][j]);
       }

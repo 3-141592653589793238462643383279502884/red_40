@@ -28,7 +28,7 @@
 	Mario.Util.inherits(Player, Mario.Entity);
 
 	Player.prototype.run = function() {
-		this.maxSpeed = 2.5;
+		this.maxSpeed = 2.2;
 		if (this.power == 2 && !this.runheld) {
 			this.shoot();
 		}
@@ -44,7 +44,8 @@
 	}
 
 	Player.prototype.noRun = function() {
-		this.maxSpeed = 1.5;
+		//lowered mario's speed for easier control. --mightyowl866
+		this.maxSpeed = 1.1;
 		this.moveAcc = 0.07;
 		this.runheld = false;
 	}
